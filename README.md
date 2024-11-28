@@ -33,9 +33,9 @@ At some point I thought of splitting the dataset into 12 models (home and away, 
 
 From inspecting the plots of the data and looking at the data myself. Below is the found 3 errors within the data and how I fixed it:
 
-1.  League 2 does not have any EU point spread and no EU odds. **Solution:** We don't want to drop the row because we have limited data (209 points), and especially we would be dropping a whole league. The intuitive solution is to just use what we have (i.e. use point_spread_us and American odds) and copy them over to decimal. Another solution
-2.  5 rows, specifically game_id's 30, 31, 32, 180, 181 have no American odds (or both homeprice_us and awayprice_us are listed as 999). **Solution:** Similarly to above, we use the knowledge we have: the homeprice_eu and awayprice_eu. Although the point spreads are slightly different and therefore the odds should be slightly different we know they should be very similar and generalize this for the model.
-3.  The sneakiest of them all, when point_spread_us and point_spread_eu disagree on the favourite. We know a positive point spread means the home team is the favourite and the away team is the underdog (with the exception of small point spread where both teams are favourites). That is, the error is when point_spread_us < 0 and point_spread_eu > 0 (e.g. game_id 33: point_spread_us = -147.5 and point_spread_eu = 146.5). **Solution:** To determine which point spread is correct we have to look at the other fields. We look at the American Odds and the Decimal Odds and take whichever they both agree on is the favourite. If they agree the home team is the favourite then both point spreads should be positive, otherwise we should make them both negative.
+1.  League 2 does not have any EU point spread and no EU odds. **Solution:** We don't want to drop the row because we have limited data (209 points), and especially we would be dropping a whole league. The intuitive solution is to just use what we have (i.e. use `point_spread_us` and American odds) and copy them over to decimal. Another solution
+2.  5 rows, specifically `game_id's 30, 31, 32, 180, 181` have no American odds (or both `homeprice_us` and `awayprice_us` are listed as `999`). **Solution:** Similarly to above, we use the knowledge we have: the homeprice_eu and awayprice_eu. Although the point spreads are slightly different and therefore the odds should be slightly different we know they should be very similar and generalize this for the model.
+3.  The sneakiest of them all, when `point_spread_us` and `point_spread_eu` disagree on the favourite. We know a positive point spread means the home team is the favourite and the away team is the underdog (with the exception of small point spread where both teams are favourites). That is, the error is when `point_spread_us < 0` and `point_spread_eu > 0` (e.g. game_id 33: point_spread_us = -147.5 and point_spread_eu = 146.5). **Solution:** To determine which point spread is correct we have to look at the other fields. We look at the American Odds and the Decimal Odds and take whichever they both agree on is the favourite. If they agree the home team is the favourite then both point spreads should be positive, otherwise we should make them both negative.
 
 These changes take place in `clean_data.py`.
 
@@ -73,6 +73,8 @@ We can also tell why the mean squared error is so large: The extreme points, whe
 
 ## Version 2 Results
 
+Results after including "extreme" points into the training set.
+
 > Home Price US Model MAE: 8.54 \
 > Home Price US Model MSE: 348.06 \
 > Home Price US Model MAPE: 0.05% \
@@ -100,6 +102,6 @@ At first when I saw these graphs, I certainly thought the model was overfitting 
 
    which is good considering the size of the dataset and the range of the data (approximately -500 to 500).
 
-## Final Submission
+## Final Submission (submission.py)
 
-Satisfied with these results I exported the home and away model using LightGBM's native `save_model` function after training them and loading them in the `submission.py` where our `makeSpreads` function is. `makeSpreads(point_spread: float, league_id: int)` which takes `point_spread` a float representing the point spread the bookmaker has for this game and the `league_id`. `makeSpreads(point_spread: float, league_id: int)` returns a tuple containing 2 elements, the first being the moneyline for the home team in American Odds and the second being the moneyline for the away team in American Odds.
+Satisfied with these results I exported the home and away model using LightGBM's native `save_model` function after training them and loading them in the **`submission.py`** where our `makeSpreads` function is. `makeSpreads(point_spread: float, league_id: int)` which takes `point_spread` a float representing the point spread the bookmaker has for this game and the `league_id`. `makeSpreads(point_spread: float, league_id: int)` returns a tuple containing 2 elements, the first being the moneyline for the home team in American Odds and the second being the moneyline for the away team in American Odds.
