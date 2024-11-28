@@ -1,3 +1,28 @@
+import subprocess
+import sys
+
+requirements = """
+pandas
+numpy
+lightgbm
+scikit-learn
+matplotlib
+seaborn
+"""
+
+def install_requirements(package_name):
+    try:
+        subprocess.check_call(
+            [sys.executable, "-m", "pip", "install", package_name], 
+        )
+    except subprocess.CalledProcessError:
+        print("Failed to install required packages.")
+        sys.exit(1)
+
+for package in requirements.split("\n"):
+    if package:
+        install_requirements(package)
+
 import pandas as pd
 import numpy as np
 import lightgbm as lgb
