@@ -43,12 +43,12 @@ Away Price US Model MAPE: ~17% ⇒ 0.07% \
 
 This makes sense because mean squared error punishes large mistakes greater than mean absolute error. So before cleaning the data properly there were many outliers (from technique 3) that didn't follow the intuitive nature of positive point spread, home team favourite, away team underdog and negative point spread, away team favourite, home team underdog.
 
-![image](US_PSvsHomeOddsL1V1.png)
-![image](US_PSvsAwayOddsL1V1.png)
-![image](US_PSvsHomeOddsL2V1.png)
-![image](US_PSvsAwayOddsL1V1.png)
-![image](US_PSvsHomeOddsL3V1.png)
-![image](US_PSvsAwayOddsL1V1.png)
+![image](/images/US_PSvsHomeOddsL1V1.png)
+![image](/images/US_PSvsAwayOddsL1V1.png)
+![image](/images/US_PSvsHomeOddsL2V1.png)
+![image](/images/US_PSvsAwayOddsL1V1.png)
+![image](/images/US_PSvsHomeOddsL3V1.png)
+![image](/images/US_PSvsAwayOddsL1V1.png)
 
 We can clearly see for point spreads around -200 to 200 the model is very accurate. It is even able to determine that both teams are favourites when the point spread is very small:
 
@@ -71,12 +71,12 @@ Away Price US Model MAE: 8.95 \
 Away Price US Model MSE: 351.04 \
 Away Price US Model MAPE: 0.06%
 
-![image](US_PSvsHomeOddsL1V2.png)
-![image](US_PSvsAwayOddsL1V2.png)
-![image](US_PSvsHomeOddsL2V2.png)
-![image](US_PSvsAwayOddsL1V2.png)
-![image](US_PSvsHomeOddsL3V2.png)
-![image](US_PSvsAwayOddsL1V2.png)
+![image](/images/US_PSvsHomeOddsL1V2.png)
+![image](/images/US_PSvsAwayOddsL1V2.png)
+![image](/images/US_PSvsHomeOddsL2V2.png)
+![image](/images/US_PSvsAwayOddsL1V2.png)
+![image](/images/US_PSvsHomeOddsL3V2.png)
+![image](/images/US_PSvsAwayOddsL1V2.png)
 
 ### Preventing Overfitting
 
