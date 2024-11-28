@@ -207,7 +207,10 @@ def plot_relationships(df, model_home, model_away, samples, league_id=1):
     # Plot US Point Spread vs Home Moneyline (US)
     plt.figure(figsize=(10, 6))
     sns.scatterplot(x='point_spread_us', y='homeprice_us', data=df_plot, label='Actual Home Moneyline (US)', color='blue')
-    sns.lineplot(x='point_spread_us', y='pred_home_us', data=prediction_df, label='Predicted Home Moneyline (US)', color='red')
+    sns.scatterplot(x='point_spread_us', y='pred_home_us', data=prediction_df, label='Predicted Home Moneyline (US)', color='red')
+    a = sns.lineplot(x='point_spread_us', y='pred_home_us', data=prediction_df, color='red')
+    a.lines[0].set_linestyle("--")
+    a.collections[1].set_sizes([20])
     
     # Plot sample predictions
     plotted = False
@@ -227,8 +230,11 @@ def plot_relationships(df, model_home, model_away, samples, league_id=1):
     # Plot US Point Spread vs Away Moneyline (US)
     plt.figure(figsize=(10, 6))
     sns.scatterplot(x='point_spread_us', y='awayprice_us', data=df_plot, label='Actual Away Moneyline (US)', color='purple')
-    sns.lineplot(x='point_spread_us', y='pred_away_us', data=prediction_df, label='Predicted Away Moneyline (US)', color='orange')
-    
+    sns.scatterplot(x='point_spread_us', y='pred_away_us', data=prediction_df, label='Predicted Away Moneyline (US)', color='orange')
+    b = sns.lineplot(x='point_spread_us', y='pred_away_us', data=prediction_df, color='orange')
+    b.lines[0].set_linestyle("--")
+    b.collections[1].set_sizes([20])
+
     # Plot sample predictions
     plotted = False
     for sample in samples:
